@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class MoveControllerTest {
     @Test
     public void applyFigureTest() throws Exception {
-        final Field field = new Field();
+        final Field field = new Field(4,5);
 
         final Point point = new Point(1, 1);
 
@@ -30,7 +30,7 @@ public class MoveControllerTest {
 
     @Test
     public void pointAlreadyOccupiedTest() throws Exception {
-        final Field field = new Field();
+        final Field field = new Field(4,5);
 
         final Point point = new Point(1, 1);
 
