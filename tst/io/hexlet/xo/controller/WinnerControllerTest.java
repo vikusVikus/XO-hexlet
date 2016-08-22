@@ -34,22 +34,6 @@ public class WinnerControllerTest {
     }
 
     @Test
-    public void checkOneRowWithTwoFigures() throws Exception {
-        final Field field = new Field();
-
-        final Point p1 = new Point(1,2);
-
-        final Point p2 = new Point(1,1);
-
-        field.setFigure(p1, Figure.X);
-        field.setFigure(p2, Figure.O);
-
-        final Figure actualValue = WinnerController.checkOneRow(1, field);
-
-        assertNull(actualValue);
-    }
-
-    @Test
     public void checkOneRowWithThreeFigures() throws Exception {
         final Field field = new Field();
 
