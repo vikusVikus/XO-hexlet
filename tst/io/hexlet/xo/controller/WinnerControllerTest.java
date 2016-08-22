@@ -349,4 +349,62 @@ public class WinnerControllerTest {
 
         assertEquals(expectedValue, actualValue);
     }
+
+    @Test
+    public void getWinnerTestWithEmptyField() throws  Exception {
+        final Field field = new Field();
+
+        Figure actualValue = WinnerController.getWinner(field);
+
+        assertNull(actualValue);
+    }
+
+    @Test
+    public void getWinnerTestWithSeveralFigures() throws  Exception {
+        final Field field = new Field();
+
+        final Point p1 = new Point(0,0);
+
+        final Point p2 = new Point(0,2);
+
+        final Point p3 = new Point(1,0);
+
+        final Point p4 = new Point(2,2);
+
+        field.setFigure(p1, Figure.X);
+        field.setFigure(p2, Figure.O);
+        field.setFigure(p3, Figure.X);
+        field.setFigure(p4, Figure.O);
+
+        Figure actualValue = WinnerController.getWinner(field);
+
+        assertNull(actualValue);
+    }
+
+    @Test
+    public void getWinnerTestWithAWinnerFigure() throws  Exception {
+        final Field field = new Field();
+
+        final Figure expectedValue = Figure.X;
+
+        final Point p1 = new Point(0,0);
+
+        final Point p2 = new Point(0,2);
+
+        final Point p3 = new Point(1,1);
+
+        final Point p4 = new Point(1,2);
+
+        final Point p5 = new Point(2,2);
+
+        field.setFigure(p1, Figure.X);
+        field.setFigure(p2, Figure.O);
+        field.setFigure(p3, Figure.X);
+        field.setFigure(p4, Figure.O);
+        field.setFigure(p5, Figure.X);
+
+        Figure actualValue = WinnerController.getWinner(field);
+
+        assertEquals(expectedValue, actualValue);
+    }
 }
