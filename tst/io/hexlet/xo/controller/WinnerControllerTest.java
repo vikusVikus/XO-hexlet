@@ -2,11 +2,9 @@ package io.hexlet.xo.controller;
 
 import io.hexlet.xo.model.Field;
 import io.hexlet.xo.model.Figure;
-import io.hexlet.xo.model.exceptions.AbstractXOException;
 import org.junit.Test;
 
 import java.awt.*;
-import java.awt.image.PackedColorModel;
 
 import static org.junit.Assert.*;
 
@@ -251,16 +249,16 @@ public class WinnerControllerTest {
     }
 
     @Test
-    public void checkDiag1WithNoFigures() throws Exception {
+    public void checkFirstDiagonalWithNoFigures() throws Exception {
         final Field field = new Field();
 
-        Figure actualValue = WinnerController.checkDiag1(field);
+        Figure actualValue = WinnerController.checkFirstDiagonal(field);
 
         assertNull(actualValue);
     }
 
     @Test
-    public void checkDiag1WithThreeRandomFigures() throws Exception {
+    public void checkFirstDiagonalWithThreeRandomFigures() throws Exception {
         final Field field = new Field();
 
         final Point p1 = new Point(0,0);
@@ -273,13 +271,13 @@ public class WinnerControllerTest {
         field.setFigure(p2, Figure.O);
         field.setFigure(p3, Figure.X);
 
-        Figure actualValue = WinnerController.checkDiag1(field);
+        Figure actualValue = WinnerController.checkFirstDiagonal(field);
 
         assertNull(actualValue);
     }
 
     @Test
-    public void checkDiag1WithThreeEqaulFigures() throws Exception {
+    public void checkFirstDiagonalWithThreeEqaulFigures() throws Exception {
         final Field field = new Field();
 
         final Point p1 = new Point(0,0);
@@ -296,7 +294,58 @@ public class WinnerControllerTest {
         field.setFigure(p2, Figure.X);
         field.setFigure(p3, Figure.X);
 
-        Figure actualValue = WinnerController.checkDiag1(field);
+        Figure actualValue = WinnerController.checkFirstDiagonal(field);
+
+        assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    public void checkSecondDiagonalWithNoFigures() throws Exception {
+        final Field field = new Field();
+
+        Figure actualValue = WinnerController.checkSecondDiagonal(field);
+
+        assertNull(actualValue);
+    }
+
+    @Test
+    public void checkSecondDiagonalWithThreeRandomFigures() throws Exception {
+        final Field field = new Field();
+
+        final Point p1 = new Point(2,0);
+
+        final Point p2 = new Point(1,1);
+
+        final Point p3 = new Point(0,2);
+
+        field.setFigure(p1, Figure.X);
+        field.setFigure(p2, Figure.O);
+        field.setFigure(p3, Figure.X);
+
+        Figure actualValue = WinnerController.checkSecondDiagonal(field);
+
+        assertNull(actualValue);
+    }
+
+    @Test
+    public void checkSecondDiagonalWithThreeEqaulFigures() throws Exception {
+        final Field field = new Field();
+
+        final Point p1 = new Point(2,0);
+
+        final Point p2 = new Point(1,1);
+
+        final Point p3 = new Point(0,2);
+
+        final Figure inputValue = Figure.X;
+
+        final Figure expectedValue = inputValue;
+
+        field.setFigure(p1, Figure.X);
+        field.setFigure(p2, Figure.X);
+        field.setFigure(p3, Figure.X);
+
+        Figure actualValue = WinnerController.checkSecondDiagonal(field);
 
         assertEquals(expectedValue, actualValue);
     }
