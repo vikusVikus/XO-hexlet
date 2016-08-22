@@ -7,24 +7,17 @@ import java.awt.Point;
 public class Field{
     private static final int MIN_COORDINATE = 0;
 
-    private final int fieldWidth;
-
-    private final int fieldHeight;
+    private final int fieldSize;
 
     private final Figure[][] field;
 
-    public Field(int fieldWidth, int fieldHeight) {
-        this.fieldWidth = fieldWidth;
-        this.fieldHeight = fieldHeight;
-        this.field = new Figure[fieldWidth][fieldHeight];
+    public Field(int fieldSize) {
+        this.fieldSize = fieldSize;
+        this.field = new Figure[fieldSize][fieldSize];
     }
 
-    public int getFieldWidth() {
-        return fieldWidth;
-    }
-
-    public int getFieldHeight() {
-        return fieldHeight;
+    public int getFieldSize() {
+        return fieldSize;
     }
 
     public Figure getFigure (final Point point) throws InvalidPointException {
@@ -44,14 +37,10 @@ public class Field{
     }
 
     public boolean checkPoint(Point point){
-        return checkCoordinateX(point.x) && checkCoordinateY(point.y);
+        return checkCoordinate(point.x) && checkCoordinate(point.y);
     }
 
-    public boolean checkCoordinateX(int x) {
-        return x >= MIN_COORDINATE && x < getFieldWidth();
-    }
-
-    public boolean checkCoordinateY(int y) {
-        return y >= MIN_COORDINATE && y < getFieldHeight();
+    public boolean checkCoordinate(int coordinate) {
+        return coordinate >= MIN_COORDINATE && coordinate < getFieldSize();
     }
 }
