@@ -5,16 +5,15 @@ import io.hexlet.xo.model.Figure;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 
 import java.awt.*;
-import java.awt.image.PackedColorModel;
 
 public class WinnerController {
     public static Figure getWinner(final Field field) {
         Figure winner;
 
-        winner = checkByRow(field);
+        winner = checkAllRows(field);
         if (winner!= null) return winner;
 
-        winner = checkByColumn(field);
+        winner = checkAllColumns(field);
         if (winner != null) return winner;
 
         winner = checkFirstDiagonal(field);
@@ -26,7 +25,7 @@ public class WinnerController {
         return null;
     }
 
-    public static Figure checkByRow (final Field field){
+    public static Figure checkAllRows(final Field field){
         final int length = field.getSize();
 
         for (int row = 0; row < length; row++) {
@@ -67,7 +66,7 @@ public class WinnerController {
         return tmpFigure;
     }
 
-    public static Figure checkByColumn (final Field field){
+    public static Figure checkAllColumns(final Field field){
         final int length = field.getSize();
 
         for (int col = 0; col < length; col++) {
