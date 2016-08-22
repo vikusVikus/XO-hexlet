@@ -1,5 +1,6 @@
 package io.hexlet.xo.model;
 
+import io.hexlet.xo.model.exceptions.AlreadyOccupiedException;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 import org.junit.Test;
 
@@ -7,9 +8,6 @@ import java.awt.*;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by vikus on 22.8.2016.
- */
 public class FieldTest {
     @Test
     public void getSize() throws Exception {
@@ -90,5 +88,19 @@ public class FieldTest {
             final Figure actualValue = field.getFigure(inputPoint);
             fail();
         } catch(final InvalidPointException e) {}
+    }
+
+    @Test
+    public void getFigureWhenPointIsAlreadyOccupied()  throws Exception {
+        final Field field = new Field();
+
+        final Point inputPoint = new Point(0,2);
+
+        field.setFigure(inputPoint, Figure.O);
+
+        try {
+            field.setFigure(inputPoint, Figure.O);
+            fail();
+        } catch(final AlreadyOccupiedException e) {}
     }
 }
