@@ -5,8 +5,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class GameTest {
+
     @Test
-    public void getPlayers() throws Exception {
+    public void getPlayersTest() throws Exception {
         final Player p1 = new Player("Slava", Figure.X);
 
         final Player p2 = new Player("Max", Figure.O);
@@ -23,8 +24,8 @@ public class GameTest {
     }
 
     @Test
-    public void getField() throws Exception {
-        final Field inputValue = new Field();
+    public void getFieldTest() throws Exception {
+        final Field inputValue = new Field(3,4);
 
         final Field expectedValue = inputValue;
 
@@ -36,7 +37,7 @@ public class GameTest {
     }
 
     @Test
-    public void getName() throws Exception {
+    public void getNameTest() throws Exception {
         final String inputValue = "XO game";
 
         final String expectedValue = inputValue;
@@ -47,5 +48,4 @@ public class GameTest {
 
         assertEquals(expectedValue, actualValue);
     }
-
 }
