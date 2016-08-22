@@ -250,4 +250,54 @@ public class WinnerControllerTest {
         assertEquals(expectedValue, actualValue);
     }
 
+    @Test
+    public void checkDiag1WithNoFigures() throws Exception {
+        final Field field = new Field();
+
+        Figure actualValue = WinnerController.checkDiag1(field);
+
+        assertNull(actualValue);
+    }
+
+    @Test
+    public void checkDiag1WithThreeRandomFigures() throws Exception {
+        final Field field = new Field();
+
+        final Point p1 = new Point(0,0);
+
+        final Point p2 = new Point(1,1);
+
+        final Point p3 = new Point(2,2);
+
+        field.setFigure(p1, Figure.X);
+        field.setFigure(p2, Figure.O);
+        field.setFigure(p3, Figure.X);
+
+        Figure actualValue = WinnerController.checkDiag1(field);
+
+        assertNull(actualValue);
+    }
+
+    @Test
+    public void checkDiag1WithThreeEqaulFigures() throws Exception {
+        final Field field = new Field();
+
+        final Point p1 = new Point(0,0);
+
+        final Point p2 = new Point(1,1);
+
+        final Point p3 = new Point(2,2);
+
+        final Figure inputValue = Figure.X;
+
+        final Figure expectedValue = inputValue;
+
+        field.setFigure(p1, Figure.X);
+        field.setFigure(p2, Figure.X);
+        field.setFigure(p3, Figure.X);
+
+        Figure actualValue = WinnerController.checkDiag1(field);
+
+        assertEquals(expectedValue, actualValue);
+    }
 }
