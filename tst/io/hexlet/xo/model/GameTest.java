@@ -25,7 +25,7 @@ public class GameTest {
 
     @Test
     public void getFieldTest() throws Exception {
-        final Field inputValue = new Field(3,4);
+        final Field inputValue = new Field(3);
 
         final Field expectedValue = inputValue;
 
