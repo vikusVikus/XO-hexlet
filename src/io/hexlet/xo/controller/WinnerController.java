@@ -11,25 +11,17 @@ public class WinnerController {
     public static Figure getWinner(final Field field) {
         Figure winner;
 
-        if (checkByRow(field) != null) {
-            winner = checkByRow(field);
-            return winner;
-        }
+        winner = checkByRow(field);
+        if (winner!= null) return winner;
 
-        if (checkByColumn(field) != null) {
-            winner = checkByColumn(field);
-            return winner;
-        }
+        winner = checkByColumn(field);
+        if (winner != null) return winner;
 
-        if (checkFirstDiagonal(field) != null) {
-            winner = checkFirstDiagonal(field);
-            return winner;
-        }
+        winner = checkFirstDiagonal(field);
+        if(winner != null) return winner;
 
-        if (checkSecondDiagonal(field) != null) {
-            winner = checkSecondDiagonal(field);
-            return winner;
-        }
+        winner = checkSecondDiagonal(field);
+        if(winner != null) return winner;
 
         return null;
     }
