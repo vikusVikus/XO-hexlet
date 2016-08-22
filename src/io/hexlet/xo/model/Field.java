@@ -13,7 +13,7 @@ public class Field{
 
     private final Figure[][] field;
 
-    public Field(int fieldWidth, int fieldHeight,) {
+    public Field(int fieldWidth, int fieldHeight) {
         this.fieldWidth = fieldWidth;
         this.fieldHeight = fieldHeight;
         this.field = new Figure[fieldWidth][fieldHeight];
