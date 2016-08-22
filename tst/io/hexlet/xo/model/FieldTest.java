@@ -9,34 +9,21 @@ import static org.junit.Assert.*;
 
 public class FieldTest {
     @Test
-    public void getFieldWidthTest() throws Exception {
+    public void getFieldSizeTest() throws Exception {
         final int inputValue = 4;
 
         final int expectedValue = inputValue;
 
-        final Field field = new Field(inputValue, 0);
+        final Field field = new Field(inputValue);
 
-        final int actualValue = field.getFieldWidth();
-
-        assertEquals(expectedValue, actualValue);
-    }
-
-    @Test
-    public void getFieldHeightTest() throws Exception {
-        final int inputValue = 4;
-
-        final int expectedValue = inputValue;
-
-        final Field field = new Field(0, inputValue);
-
-        final int actualValue = field.getFieldHeight();
+        final int actualValue = field.getFieldSize();
 
         assertEquals(expectedValue, actualValue);
     }
 
     @Test
     public void setFigureTest() throws Exception {
-        final Field field = new Field(4,4);
+        final Field field = new Field(4);
 
         final Point inputPoint = new Point(2,1);
 
@@ -51,7 +38,7 @@ public class FieldTest {
 
     @Test
     public void getFigureWhenFigureNotSetTest() throws Exception {
-        final Field field = new Field(4,4);
+        final Field field = new Field(4);
 
         final Point inputPoint = new Point(0,0);
 
@@ -62,7 +49,7 @@ public class FieldTest {
 
     @Test
     public void getFigureWhenXIsLessThenZeroTest() throws Exception {
-        final Field field = new Field(4,5);
+        final Field field = new Field(4);
 
         final Point inputPoint = new Point(-1,0);
 
@@ -74,7 +61,7 @@ public class FieldTest {
 
     @Test
     public void getFigureWhenYIsLessThenZeroTest() throws Exception {
-        final Field field = new Field(4,6);
+        final Field field = new Field(4);
 
         final Point inputPoint = new Point(0, -1);
 
@@ -86,7 +73,7 @@ public class FieldTest {
 
     @Test
     public void getFigureWhenXIsMoreThenWidthTest() throws Exception {
-        final Field field = new Field(4,5);
+        final Field field = new Field(4);
 
         final Point inputPoint = new Point(4, 0);
 
@@ -98,7 +85,7 @@ public class FieldTest {
 
     @Test
     public void getFigureWhenYIsMoreThenZero()  throws Exception {
-        final Field field = new Field(4,6);
+        final Field field = new Field(4);
 
         final Point inputPoint = new Point(0,6);
 
