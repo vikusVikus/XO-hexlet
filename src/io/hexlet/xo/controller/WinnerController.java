@@ -95,7 +95,7 @@ public class WinnerController {
         return tmpFigure;
     }
 
-    public static Figure checkDiag1 (final Field field) {
+    public static Figure checkFirstDiagonal(final Field field) {
         Figure tmpFigure = null;
 
         final int length = field.getSize() - 1;
@@ -123,4 +123,31 @@ public class WinnerController {
         return tmpFigure;
     }
 
+    public static Figure checkSecondDiagonal(final Field field) {
+        Figure tmpFigure = null;
+
+        final int length = field.getSize()-1;
+
+        for (int row = 0, column = length; row < length; row++, column-- ) {
+
+            final Point p1 = new Point(row, column);
+
+            final Point p2 = new Point(row+1, column-1);
+
+            try {
+                if (field.getFigure(p1) == null || field.getFigure(p2) == null ) {
+                    return null;
+                }
+
+                if (!field.getFigure(p1).equals(field.getFigure(p2))) {
+                    return null;
+                }
+
+                tmpFigure =  field.getFigure(p1);
+
+            } catch (InvalidPointException e) {}
+        }
+
+        return tmpFigure;
+    }
 }
