@@ -6,15 +6,11 @@ import io.hexlet.xo.model.exceptions.AbstractXOException;
 import org.junit.Test;
 
 import java.awt.*;
+import java.awt.image.PackedColorModel;
 
 import static org.junit.Assert.*;
 
 public class WinnerControllerTest {
-    @Test
-    public void checkByRow() throws Exception {
-
-    }
-
     @Test
     public void checkFirstEmptyRow() throws Exception {
        final Field field = new Field();
@@ -91,6 +87,76 @@ public class WinnerControllerTest {
         field.setFigure(p3, inputValue);
 
         final Figure actualValue = WinnerController.checkOneRow(1, field);
+
+        assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    public void checkByRowWithEmptyField() throws Exception {
+        final Field field = new Field();
+
+        final Figure actualValue = WinnerController.checkByRow(field);
+
+        assertNull(actualValue);
+    }
+
+    @Test
+    public void checkByRowWithOneFigureInTheField() throws Exception {
+        final Field field = new Field();
+
+        final Point p1 = new Point(0,0);
+
+        final Figure figure = Figure.X;
+
+        field.setFigure(p1, figure);
+
+        final Figure actualValue = WinnerController.checkByRow(field);
+
+        assertNull(actualValue);
+    }
+
+    @Test
+    public void checkByRowWithSeveralFiguresInTheField() throws Exception {
+        final Field field = new Field();
+
+        final Point p1 = new Point(0,0);
+
+        final Point p2 = new Point(0,2);
+
+        final Point p3 = new Point(1,2);
+
+        final Point p4 = new Point(2,2);
+
+        field.setFigure(p1, Figure.X);
+        field.setFigure(p2, Figure.O);
+        field.setFigure(p3, Figure.X);
+        field.setFigure(p4, Figure.O);
+
+        final Figure actualValue = WinnerController.checkByRow(field);
+
+        assertNull(actualValue);
+    }
+
+    @Test
+    public void checkByRowWithRowFilled() throws Exception {
+        final Field field = new Field();
+
+        final Point p1 = new Point(2,0);
+
+        final Point p2 = new Point(2,1);
+
+        final Point p3 = new Point(2,2);
+
+        final Figure inputValue = Figure.X;
+
+        final Figure expectedValue = inputValue;
+
+        field.setFigure(p1, inputValue);
+        field.setFigure(p2, inputValue);
+        field.setFigure(p3, inputValue);
+
+
+        final Figure actualValue = WinnerController.checkByRow(field);
 
         assertEquals(expectedValue, actualValue);
     }
