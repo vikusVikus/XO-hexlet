@@ -8,10 +8,31 @@ import java.awt.*;
 import java.awt.image.PackedColorModel;
 
 public class WinnerController {
-//    public Figure getWinner (final Field field) {
-//
-//
-//    }
+    public static Figure getWinner(final Field field) {
+        Figure winner;
+
+        if (checkByRow(field) != null) {
+            winner = checkByRow(field);
+            return winner;
+        }
+
+        if (checkByColumn(field) != null) {
+            winner = checkByColumn(field);
+            return winner;
+        }
+
+        if (checkFirstDiagonal(field) != null) {
+            winner = checkFirstDiagonal(field);
+            return winner;
+        }
+
+        if (checkSecondDiagonal(field) != null) {
+            winner = checkSecondDiagonal(field);
+            return winner;
+        }
+
+        return null;
+    }
 
     public static Figure checkByRow (final Field field){
         final int length = field.getSize();
