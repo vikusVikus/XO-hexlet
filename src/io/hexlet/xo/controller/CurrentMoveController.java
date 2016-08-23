@@ -13,15 +13,20 @@ public class CurrentMoveController {
         int counter = 0;
 
         for (int row = 0; row < size; row++ ) {
-            for (int col = 0; col < size; col++ ) {
-                try {
-                    if(field.getFigure(new Point(row, col)) != null) {
-                        counter++;
-                    }
-                } catch(InvalidPointException e) {}
-            }
+            counter += countFigureRow(field, row);
         }
 
         return counter%2 == 0? Figure.X : Figure.O;
+    }
+
+    private int countFigureRow(final Field field, final int row) {
+        int countFigures = 0;
+        for (int col = 0; col < field.getFieldSize(); col++ ) {
+            try {
+                if (field.getFigure(new Point(row, col)) != null ) countFigures++;
+            } catch (InvalidPointException e) {}
+        }
+
+        return countFigures;
     }
 }
