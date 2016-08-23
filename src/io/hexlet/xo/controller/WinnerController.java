@@ -9,8 +9,6 @@ import java.awt.*;
 public class WinnerController {
 
     public Figure getWinner(final Field field) {
-        Figure winner;
-
         try {
             for (int i = 0; i < field.getFieldSize(); i++) {
                 if (checkPoints(field, new Point(i, 0), p -> new Point(p.x, p.y+1))) {
