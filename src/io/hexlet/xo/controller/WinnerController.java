@@ -7,159 +7,56 @@ import io.hexlet.xo.model.exceptions.InvalidPointException;
 import java.awt.*;
 
 public class WinnerController {
-    public static Figure getWinner(final Field field) {
+
+    public Figure getWinner(final Field field) {
         Figure winner;
 
-        winner = checkAllRows(field);
-        if (winner!= null) return winner;
-
-        winner = checkAllColumns(field);
-        if (winner != null) return winner;
-
-        winner = checkFirstDiagonal(field);
-        if(winner != null) return winner;
-
-        winner = checkSecondDiagonal(field);
-        if(winner != null) return winner;
-
-        return null;
-    }
-
-    public static Figure checkAllRows(final Field field){
-        final int length = field.getSize();
-
-        for (int row = 0; row < length; row++) {
-            Figure figure = checkOneRow(row, field);
-
-            if (figure != null) { return figure;}
-        }
-
-        return null;
-    }
-
-    public static Figure checkOneRow (final int row, final Field field) {
-        Figure tmpFigure = null;
-
-        int length = field.getSize() - 1;
-
-        for (int col = 0; col < length; col++ ) {
-            final Point p1 = new Point(row, col);
-
-            final Point p2 = new Point(row, col+1);
-
-            try {
-                if (field.getFigure(p1) == null || field.getFigure(p2) == null) {
-                    return null;
+        try {
+            for (int i = 0; i < field.getFieldSize(); i++) {
+                if (checkPoints(field, new Point(i, 0), p -> new Point(p.x, p.y+1))) {
+                    return field.getFigure(new Point(i,0));
                 }
-
-                if (!field.getFigure(p1).equals(field.getFigure(p2))) {
-                    return null;
-                }
-
-                tmpFigure = field.getFigure(p1);
-
-            } catch (InvalidPointException e) {
-                e.printStackTrace();
             }
+            for (int i = 0; i < field.getFieldSize(); i++ ) {
+                if (checkPoints(field, new Point(0, i), p-> new Point(p.x+1, p.y))) {
+                    return field.getFigure(new Point(0,i));
+                }
+            }
+            if (checkPoints(field, new Point(0,0), p-> new Point(p.x+1, p.y+1))) {
+                return field.getFigure(new Point(0,0));
+            }
+            if (checkPoints(field, new Point(0, field.getFieldSize()-1), p->new Point(p.x+1, p.y-1))) {
+                return field.getFigure(new Point(0, field.getFieldSize()-1));
+            }
+        } catch (InvalidPointException e) {
+            e.printStackTrace();
         }
 
-        return tmpFigure;
-    }
-
-    public static Figure checkAllColumns(final Field field){
-        final int length = field.getSize();
-
-        for (int col = 0; col < length; col++) {
-            Figure figure = checkOneColumn(col, field);
-
-            if (figure != null) { return figure;}
-        }
 
         return null;
     }
 
-    public static Figure checkOneColumn (final int col, final Field field) {
-        Figure tmpFigure = null;
+    private boolean checkPoints(final Field field,
+                               final Point currentPoint,
+                               final IPointGenerator pointGenerator) {
+        final Figure currentFigure;
+        final Figure nextFigure;
+        final Point nextPoint = pointGenerator.next(currentPoint);
 
-        int length = field.getSize() - 1;
-
-        for (int row = 0; row < length; row++ ) {
-            final Point p1 = new Point(row, col);
-
-            final Point p2 = new Point(row + 1, col);
-
-            try {
-                if (field.getFigure(p1) == null || field.getFigure(p2) == null) {
-                    return null;
-                }
-
-                if (!field.getFigure(p1).equals(field.getFigure(p2))) {
-                    return null;
-                }
-
-                tmpFigure = field.getFigure(p1);
-
-            } catch (InvalidPointException e) {
-                e.printStackTrace();
-            }
+        try {
+            currentFigure = field.getFigure(currentPoint);
+            nextFigure = field.getFigure(nextPoint);
+        } catch (InvalidPointException e) {
+            return true;
         }
 
-        return tmpFigure;
+        if (currentFigure == null) return false;
+        if (currentFigure != nextFigure) return  false;
+
+        return checkPoints(field, nextPoint, pointGenerator);
     }
 
-    public static Figure checkFirstDiagonal(final Field field) {
-        Figure tmpFigure = null;
-
-        final int length = field.getSize() - 1;
-
-        for (int i = 0; i < length; i++ ) {
-
-            final Point p1 = new Point(i, i);
-
-            final Point p2 = new Point(i+1, i+1);
-
-            try {
-                if (field.getFigure(p1) == null || field.getFigure(p2) == null ) {
-                    return null;
-                }
-
-                if (!field.getFigure(p1).equals(field.getFigure(p2))) {
-                    return null;
-                }
-
-                tmpFigure =  field.getFigure(p1);
-
-            } catch (InvalidPointException e) {}
-        }
-
-        return tmpFigure;
-    }
-
-    public static Figure checkSecondDiagonal(final Field field) {
-        Figure tmpFigure = null;
-
-        final int length = field.getSize()-1;
-
-        for (int row = 0, column = length; row < length; row++, column-- ) {
-
-            final Point p1 = new Point(row, column);
-
-            final Point p2 = new Point(row+1, column-1);
-
-            try {
-                if (field.getFigure(p1) == null || field.getFigure(p2) == null ) {
-                    return null;
-                }
-
-                if (!field.getFigure(p1).equals(field.getFigure(p2))) {
-                    return null;
-                }
-
-                tmpFigure =  field.getFigure(p1);
-
-            } catch (InvalidPointException e) {}
-        }
-
-        return tmpFigure;
+    private interface IPointGenerator {
+        Point next(Point point);
     }
 }
