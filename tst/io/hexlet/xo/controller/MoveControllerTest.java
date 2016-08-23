@@ -13,6 +13,8 @@ import static org.junit.Assert.*;
 public class MoveControllerTest {
     @Test
     public void applyFigureTest() throws Exception {
+        final MoveController mv = new MoveController();
+
         final Field field = new Field(4);
 
         final Point point = new Point(1, 1);
@@ -21,7 +23,7 @@ public class MoveControllerTest {
 
         final Figure expectedValue = inputValue;
 
-        MoveController.applyFigure(field, point, inputValue);
+        mv.applyFigure(field, point, inputValue);
 
         final Figure actualValue = field.getFigure(point);
 
@@ -30,14 +32,16 @@ public class MoveControllerTest {
 
     @Test
     public void pointAlreadyOccupiedTest() throws Exception {
+        final MoveController mv = new MoveController();
+
         final Field field = new Field(4);
 
         final Point point = new Point(1, 1);
 
-        MoveController.applyFigure(field, point, Figure.X);
+        mv.applyFigure(field, point, Figure.X);
 
         try {
-            MoveController.applyFigure(field, point, Figure.X);
+            mv.applyFigure(field, point, Figure.X);
             fail();
         } catch (AlreadyOccupiedException e) {}
     }
