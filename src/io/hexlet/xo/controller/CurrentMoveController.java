@@ -16,6 +16,7 @@ public class CurrentMoveController {
             counter += countFigureRow(field, row);
         }
 
+        if (counter == size*size) return null;
         return counter%2 == 0? Figure.X : Figure.O;
     }
 
