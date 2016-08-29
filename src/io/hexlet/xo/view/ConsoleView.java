@@ -1,12 +1,21 @@
 package io.hexlet.xo.view;
 
+import io.hexlet.xo.controller.CurrentMoveController;
+import io.hexlet.xo.controller.MoveController;
+import io.hexlet.xo.controller.WinnerController;
 import io.hexlet.xo.model.Field;
 import io.hexlet.xo.model.Game;
+import io.hexlet.xo.model.exceptions.AlreadyOccupiedException;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 
 import java.awt.*;
+import java.util.Scanner;
 
 public class ConsoleView {
+    private CurrentMoveController currentMoveController = new CurrentMoveController();
+    private MoveController moveController = new MoveController();
+    private WinnerController winnerController = new WinnerController();
+
     public void show(final Game game) {
         final Field field = game.getField();
 
@@ -21,7 +30,35 @@ public class ConsoleView {
         }
     }
 
-    public void move(final Game game) {
+    public boolean move(final Game game) {
+        final Field field = game.getField();
+
+        try {
+            if(currentMoveController.currentMove(field) == null) {
+                System.out.println("The game is a draw");
+                return false;
+            }
+            if (winnerController.getWinner(field) != null) {
+                System.out.println("The winner of a game is " + winnerController.getWinner(field));
+                return false;
+            }
+            moveController.applyFigure(field, askPoint(), currentMoveController.currentMove(field));
+        } catch (AlreadyOccupiedException e) {
+            System.out.println("This cell is already occupied. Please enter coordinates for an empty cell");
+        } catch (InvalidPointException e) {
+            System.out.println("Please enter coordinates within the field size starting from Point(1, 1)");
+        }
+        return true;
+    }
+
+    private Point askPoint() {
+        return new Point(askCoordinate("X") - 1, askCoordinate("Y") - 1);
+    }
+
+    private int askCoordinate(final String coordinateName) {
+        final Scanner scanner = new Scanner(System.in);
+        System.out.format("Please input  %s  coordinate ", coordinateName);
+        return scanner.nextInt();
     }
 
     public void printLine(final Field field) {
@@ -39,13 +76,13 @@ public class ConsoleView {
                 System.out.print(" " + field.getFigure(new Point(row, 0)) + " ");
             }
 
-        for (int i = 1; i < field.getFieldSize(); i++ ) {
-            if (field.getFigure(new Point(row, i)) == null){
-                System.out.print("|   ");
-            } else {
-                System.out.print("|" + field.getFigure(new Point(row, i)) + " ");
+            for (int i = 1; i < field.getFieldSize(); i++ ) {
+                if (field.getFigure(new Point(row, i)) == null){
+                    System.out.print("|   ");
+                } else {
+                    System.out.print("|" + field.getFigure(new Point(row, i)) + "  ");
+                }
             }
-        }
 
         System.out.println();
 
