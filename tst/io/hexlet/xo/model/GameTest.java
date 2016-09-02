@@ -16,7 +16,7 @@ public class GameTest {
 
         final Player[] expectedValue = inputValue;
 
-        final Game game = new Game(inputValue, null, null);
+        final Game<Figure> game = new Game<>(inputValue, null, null);
 
         final Player[] actualValue = game.getPlayers();
 
@@ -25,11 +25,11 @@ public class GameTest {
 
     @Test
     public void getFieldTest() throws Exception {
-        final Field inputValue = new Field(3);
+        final Field inputValue = new Field<>(3);
 
         final Field expectedValue = inputValue;
 
-        final Game game = new Game(null, inputValue, null);
+        final Game<Figure> game = new Game<>(null, inputValue, null);
 
         final Field actualValue = game.getField();
 
@@ -42,7 +42,7 @@ public class GameTest {
 
         final String expectedValue = inputValue;
 
-        final Game game = new Game(null, null, inputValue);
+        final Game<Figure> game = new Game<>(null, null, inputValue);
 
         final String actualValue = game.getName();
 
