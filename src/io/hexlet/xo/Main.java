@@ -13,7 +13,7 @@ public class Main {
         final Player p1 = new Player("Max", Figure.X);
         final Player p2 = new Player("Jack", Figure.O);
         final Player[] players = new Player[] {p1, p2};
-        final Game game = new Game(players, field, "XO");
+        final Game<Figure> game = new Game<>(players, field, "XO");
 
         final MoveController moveController = new MoveController();
         final ConsoleView consoleView = new ConsoleView();
