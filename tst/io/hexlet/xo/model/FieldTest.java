@@ -14,7 +14,7 @@ public class FieldTest {
 
         final int expectedValue = inputValue;
 
-        final Field field = new Field(inputValue);
+        final Field <Figure> field = new Field<>(inputValue);
 
         final int actualValue = field.getFieldSize();
 
@@ -23,7 +23,7 @@ public class FieldTest {
 
     @Test
     public void setFigureTest() throws Exception {
-        final Field field = new Field(4);
+        final Field <Figure> field = new Field<>(4);
 
         final Point inputPoint = new Point(2,1);
 
@@ -38,7 +38,7 @@ public class FieldTest {
 
     @Test
     public void getFigureWhenFigureNotSetTest() throws Exception {
-        final Field field = new Field(4);
+        final Field <Figure> field = new Field<>(4);
 
         final Point inputPoint = new Point(0,0);
 
@@ -49,7 +49,7 @@ public class FieldTest {
 
     @Test
     public void getFigureWhenXIsLessThenZeroTest() throws Exception {
-        final Field field = new Field(4);
+        final Field <Figure> field = new Field<>(4);
 
         final Point inputPoint = new Point(-1,0);
 
@@ -61,7 +61,7 @@ public class FieldTest {
 
     @Test
     public void getFigureWhenYIsLessThenZeroTest() throws Exception {
-        final Field field = new Field(4);
+        final Field <Figure> field = new Field<>(4);
 
         final Point inputPoint = new Point(0, -1);
 
@@ -73,7 +73,7 @@ public class FieldTest {
 
     @Test
     public void getFigureWhenXIsMoreThenWidthTest() throws Exception {
-        final Field field = new Field(4);
+        final Field <Figure> field = new Field<>(4);
 
         final Point inputPoint = new Point(4, 0);
 
@@ -85,7 +85,7 @@ public class FieldTest {
 
     @Test
     public void getFigureWhenYIsMoreThenZero()  throws Exception {
-        final Field field = new Field(4);
+        final Field <Figure> field = new Field<>(4);
 
         final Point inputPoint = new Point(0,6);
 
