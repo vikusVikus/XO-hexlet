@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
-        final Field field = new Field(3);
+        final Field <Figure> field = new Field<>(3);
         final Player p1 = new Player("Max", Figure.X);
         final Player p2 = new Player("Jack", Figure.O);
         final Player[] players = new Player[] {p1, p2};

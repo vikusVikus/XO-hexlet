@@ -17,7 +17,7 @@ public class ConsoleView {
     private WinnerController winnerController = new WinnerController();
 
     public void show(final Game game) {
-        final Field field = game.getField();
+        final Field <Figure> field = game.getField();
 
         final int fieldSize = field.getFieldSize() - 1;
 
@@ -31,7 +31,7 @@ public class ConsoleView {
     }
 
     public boolean move(final Game game) {
-        final Field field = game.getField();
+        final Field <Figure> field = game.getField();
 
         try {
             if(currentMoveController.currentMove(field) == null) {
@@ -61,14 +61,14 @@ public class ConsoleView {
         return scanner.nextInt();
     }
 
-    public void printLine(final Field field) {
+    public void printLine(final Field <Figure> field) {
         for (int i = 0; i < field.getFieldSize(); i++ ) {
             System.out.print("___ ");
         }
         System.out.println();
     }
 
-    public void printFigures(final Field field, final int row) {
+    public void printFigures(final Field <Figure> field, final int row) {
         try {
             if (field.getFigure(new Point(row, 0)) == null){
                 System.out.print("   ");

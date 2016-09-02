@@ -4,23 +4,23 @@ import io.hexlet.xo.model.exceptions.InvalidPointException;
 
 import java.awt.Point;
 
-public class Field{
+public class Field<T>{
     private static final int MIN_COORDINATE = 0;
 
     private final int fieldSize;
 
-    private final Figure[][] field;
+    private final T[][] field;
 
     public Field(int fieldSize) {
         this.fieldSize = fieldSize;
-        this.field = new Figure[fieldSize][fieldSize];
+        this.field = (T[][]) new Object[fieldSize][fieldSize];
     }
 
     public int getFieldSize() {
         return fieldSize;
     }
 
-    public Figure getFigure (final Point point) throws InvalidPointException {
+    public T getFigure (final Point point) throws InvalidPointException {
         if (!checkPoint(point)) {
             throw new InvalidPointException();
         }
@@ -28,7 +28,7 @@ public class Field{
         return field[point.x][point.y];
     }
 
-    public void setFigure (final Point point, final Figure figure )throws InvalidPointException {
+    public void setFigure (final Point point, final T figure )throws InvalidPointException {
         if (!checkPoint(point)) {
             throw new InvalidPointException();
         }

@@ -7,7 +7,7 @@ import io.hexlet.xo.model.exceptions.InvalidPointException;
 import java.awt.*;
 
 public class CurrentMoveController {
-    public Figure currentMove(final Field field) {
+    public Figure currentMove(final Field <Figure> field) {
         final int size = field.getFieldSize();
 
         int counter = 0;
@@ -20,7 +20,7 @@ public class CurrentMoveController {
         return counter%2 == 0? Figure.X : Figure.O;
     }
 
-    private int countFigureRow(final Field field, final int row) {
+    private int countFigureRow(final Field <Figure> field, final int row) {
         int countFigures = 0;
         for (int col = 0; col < field.getFieldSize(); col++ ) {
             try {

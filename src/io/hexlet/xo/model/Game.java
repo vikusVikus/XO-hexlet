@@ -3,7 +3,7 @@ package io.hexlet.xo.model;
 public class Game {
     private final Player[] players;
 
-    private final Field field;
+    private final Field <Figure> field;
 
     private final String name;
 
