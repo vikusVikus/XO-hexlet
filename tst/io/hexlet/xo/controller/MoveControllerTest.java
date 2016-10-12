@@ -15,7 +15,7 @@ public class MoveControllerTest {
     public void applyFigureTest() throws Exception {
         final MoveController mv = new MoveController();
 
-        final Field field = new Field(4);
+        final Field<Figure> field = new Field(4);
 
         final Point point = new Point(1, 1);
 
