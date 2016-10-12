@@ -1,6 +1,8 @@
 package io.hexlet.xo.model;
 
-public class Game<F> {
+import java.util.Iterator;
+
+public class Game<F> implements Iterable<Player> {
     private final Player[] players;
 
     private final Field<F> field;
@@ -25,5 +27,24 @@ public class Game<F> {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Iterator<Player> iterator() {
+        return new PlayerIterator();
+    }
+
+    private class PlayerIterator implements Iterator<Player> {
+        private int cursor = 0;
+
+        @Override
+        public boolean hasNext() {
+            return cursor < Game.this.players.length;
+        }
+
+        @Override
+        public Player next() {
+            return Game.this.players[cursor++];
+        }
     }
 }

@@ -6,6 +6,7 @@ import io.hexlet.xo.controller.WinnerController;
 import io.hexlet.xo.model.Field;
 import io.hexlet.xo.model.Figure;
 import io.hexlet.xo.model.Game;
+import io.hexlet.xo.model.Player;
 import io.hexlet.xo.model.exceptions.AlreadyOccupiedException;
 import io.hexlet.xo.model.exceptions.InvalidPointException;
 
@@ -19,14 +20,16 @@ public class ConsoleView {
 
     public void show(final Game<Figure> game) {
         final Field <Figure> field = game.getField();
-
         final int fieldSize = field.getFieldSize() - 1;
-
         System.out.format("Game name %s\n", game.getName());
+
+        for(Player p : game) {
+            System.out.printf("Players %s is playing with %s.", p.getName(), p.getFigure());
+            System.out.println();
+        }
 
         for (int row = 0; row <= fieldSize; row++ ) {
             printFigures(field, row);
-
             if (row != fieldSize)  printLine(field);
         }
     }
